@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment webhook · skail demo</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Payment webhook</h1>
+      <p class="subtitle">The payment gateway says a payment came in, sometimes two or three times. The event id becomes the skail execution id, so the resends land on the same execution and the order is released once. If the invoice does not match, the order stays put and a review goes to finance.</p>
+    </header>
+
+    <section>
+      <h2>Gateway simulator</h2>
+      <p class="hint">Each button sends <code>POST /webhooks/payments</code> with a new event id. <b>Send again</b> resends the last one, with the same event id.</p>
+      <div class="buttons" id="scenarios">
+        <button type="button" data-order="P-1" data-amount="99.90">P-1 · R$ 99.90 <small>matches</small></button>
+        <button type="button" data-order="P-2" data-amount="200.00">P-2 · R$ 200.00 <small>invoice is 250.00</small></button>
+        <button type="button" data-order="P-3" data-amount="80.00">P-3 · R$ 80.00 <small>already paid</small></button>
+        <button type="button" data-order="P-9" data-amount="10.00">P-9 · R$ 10.00 <small>no invoice</small></button>
+      </div>
+      <div class="buttons">
+        <button type="button" id="again" class="secondary" disabled>Send again</button>
+        <button type="button" id="reset" class="secondary">Reset demo</button>
+        <span id="sent" class="sent"></span>
+      </div>
+      <p id="error" class="error" hidden></p>
+    </section>
+
+    <section>
+      <h2>Invoices</h2>
+      <table>
+        <thead><tr><th>Order</th><th>Invoice</th><th>Status</th><th>Released</th></tr></thead>
+        <tbody id="invoices"></tbody>
+      </table>
+      <p class="hint">Released = times the order was released for delivery. It never goes above 1, however many times the webhook arrives.</p>
+    </section>
+
+    <section>
+      <h2>Payment events</h2>
+      <table>
+        <thead><tr><th>Event</th><th>Order</th><th>Amount</th><th>Execution</th><th>Received</th><th>State</th></tr></thead>
+        <tbody id="events"></tbody>
+      </table>
+      <p id="eventsEmpty" class="hint">No events yet.</p>
+      <p class="hint">Execution is the task id in skail; search for it in the Monitor. Received ×2 with the same execution means one execution only.</p>
+    </section>
+
+    <section>
+      <h2>Finance reviews</h2>
+      <table>
+        <thead><tr><th>Event</th><th>Order</th><th>Reason</th></tr></thead>
+        <tbody id="reviews"></tbody>
+      </table>
+      <p id="reviewsEmpty" class="hint">None.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

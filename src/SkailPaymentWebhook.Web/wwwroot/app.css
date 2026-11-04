@@ -1,0 +1,25 @@
+:root { color-scheme: light dark; --accent: #2563eb; --muted: #6b7280; --ok: #16a34a; --warn: #d97706; --bad: #dc2626; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 system-ui, sans-serif; background: Canvas; color: CanvasText; }
+main { max-width: 760px; margin: 0 auto; padding: 2rem 1rem; }
+h1 { margin: 0; }
+h2 { font-size: 1rem; margin: 2rem 0 .5rem; }
+.subtitle, .hint { color: var(--muted); margin-top: .25rem; }
+.hint { font-size: .85rem; }
+.buttons { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .75rem 0; }
+button { font: inherit; padding: .45rem .8rem; border-radius: .5rem; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+button small { display: block; font-size: .75rem; opacity: .85; }
+button.secondary { background: transparent; color: var(--accent); }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.sent { color: var(--muted); font-size: .85rem; }
+.error { color: var(--bad); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .9rem; }
+th, td { text-align: left; padding: .3rem .5rem; border-bottom: 1px solid color-mix(in srgb, CanvasText 15%, transparent); vertical-align: top; }
+code, .mono { font-family: ui-monospace, monospace; font-size: .85em; }
+.badge { padding: .1rem .55rem; border-radius: 999px; background: var(--muted); color: #fff; font-size: .8rem; white-space: nowrap; }
+.badge.Running { background: var(--accent); }
+.badge.Released { background: var(--ok); }
+.badge.Pending, .badge.NotAccepted { background: var(--warn); }
+.badge.Failed { background: var(--bad); }
+.dup { font-weight: 600; color: var(--warn); }
+.result { display: block; color: var(--muted); font-size: .8rem; margin-top: .15rem; }
